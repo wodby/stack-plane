@@ -1,0 +1,64 @@
+name: plane
+icon: plane
+title: Plane
+category: collaboration
+
+services:
+- name: plane
+  title: Plane
+  service: plane
+  required: true
+  main: true
+  links:
+  - name: db
+    service: postgres
+  - name: redis
+    service: valkey
+  - name: amqp
+    service: rabbitmq
+  - name: storage
+    service: silo
+  - name: sendmail
+    service: opensmtpd
+
+- name: postgres
+  title: PostgreSQL
+  service: postgres
+  required: true
+  volumes:
+  - name: data
+    size: 10
+
+- name: valkey
+  title: Valkey
+  service: valkey
+  required: true
+
+# Plane's background jobs. RabbitMQ 4 refuses the transient queues Celery uses
+# for its control messages unless they are permitted.
+- name: rabbitmq
+  title: RabbitMQ
+  service: rabbitmq
+  required: true
+  env:
+  - name: RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS
+    value: '-rabbit permit_deprecated_features #{transient_nonexcl_queues=>true}'
+  volumes:
+  - name: data
+    size: 5
+
+# Uploaded files, attachments and images.
+- name: silo
+  title: Silo
+  service: silo
+  required: true
+  volumes:
+  - name: data
+    size: 20
+
+# Plane can also send email through an SMTP server set up in God Mode.
+- name: opensmtpd
+  title: OpenSMTPD
+  service: opensmtpd
+  required: false
+  disabled: true
