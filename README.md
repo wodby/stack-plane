@@ -9,7 +9,9 @@ composition for Plane.
 
 ## Stack contract
 
+- [Plane stack on Wodby](https://wodby.com/stacks/plane)
 - [Browse Wodby application stacks](https://wodby.com/stacks)
+- [Plane stack guide](https://wodby.com/docs/2.0/stacks/catalog/plane/)
 - [Wodby stack documentation](https://wodby.com/docs/2.0/stacks/)
 - [Stack manifest reference](https://wodby.com/docs/2.0/stacks/template/)
 
@@ -26,7 +28,7 @@ composition for Plane.
 
 | Component / service | Default configuration |
 | --- | --- |
-| Plane<br>`plane` | required; enabled by default; main; links: `db` → `postgres`, `redis` → `valkey`, `amqp` → `rabbitmq`, `storage` → `silo`, `sendmail` → `opensmtpd` |
+| Plane<br>`plane` | required; enabled by default; links: `db` → `postgres`, `redis` → `valkey`, `amqp` → `rabbitmq`, `storage` → `silo`, `sendmail` → `opensmtpd` |
 | PostgreSQL<br>`postgres` | required; enabled by default; volumes: `data` 10 GB |
 | Valkey<br>`valkey` | required; enabled by default |
 | RabbitMQ<br>`rabbitmq` | required; enabled by default; volumes: `data` 5 GB |
